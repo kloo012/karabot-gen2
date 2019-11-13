@@ -1,0 +1,60 @@
+{
+  "init": {
+    "response": "Welcome! Let's chat. You can ask me a variety of questions about my career path, skills and interests. Ask away, or type \"Menu\" at any time to see a list of topics we can explore."
+  },
+  "greeting": {
+    "response": "Hey! Glad you're here. Start a conversation by asking something or typing 'Menu' to see some suggestions."
+  },
+  "query_status": {
+    "response": "Things were pretty quiet until you came along."
+  },
+  "dog_name": {
+    "response": "My dog's name is Jake."
+  },
+  "show_menu": {
+    "response": "Great! Select a topic below:",
+    "opts": ["Past experience", "Show me some work", "Future outlook"]
+  },
+  "relocation": {
+    "response": "I am not interested in relocating from Denver at the moment."
+  },
+  "work_status": {
+    "response": "I'm a citizen of the U.S."
+  },
+  "describe_bot": {
+    "response": "I'm a React app running on a node backend. My natural language processing is via Wit.ai. My purpose is to automate some of the initial bits of conversation that typically take place between a recruiter and a candidate."
+  },
+  "previous_roles": {
+    "response": "I completed a rigorous Digital Design program at UC DAAP from 2007-2012, during which I completed several required internships and began teaching myself to code. After graduation, I joined a start up called CoupSmart in Cincinnati, OH where I designed and developed apps on Facebook for ~2 years. When I moved to Denver in 2014 I accepted my current role at Deloitte Digital, which is a 100% engineering role. I haven't looked back since making the transition from designer to developer! At Deloitte Digital, I've learned so much in nearly 6 years, working on such a variety of apps and technologies for a diverse range of industries. I moved up the ranks from junior level and was recently promoted to a senior dev position :)"
+  },
+  "past_projects": {
+    "response": "Description of previous projects coming soon",
+    "opts": ""
+  },
+  "pitch_me": {
+    "response": "I'm Kara, I'm awesome, please hire me.",
+    "opts": ""
+  },
+  "describe_interests": {
+    "response": "Man, I have a lot of interests and passions.",
+    "opts": ""
+  },
+  "request_call": {
+    "response": "Request to book a call or have an in-person meeting. Feature coming soon.",
+    "opts": ""
+  },
+  "job_req": {
+    "response": "You'd like to know about my future outlook and career goals? Okay. More details coming soon.",
+    "opts": ""
+  },
+  "salary_baseline": {
+    "response": "I typically don't casually talk salary numbers. Let's arrange a call if you'd like to establish a baseline number to make sure we're on the same page.",
+    "opts": ["Schedule a call"]
+  },
+  "unknown": {
+    "response": "Sorry, I'm a new KaraBot and still learning how to use meaningful dialogue. I didn't get that one. Can you repeat what you said in another way?"
+  },
+  "future_outlook": {
+    "response": "The future is bright!"
+  }
+}
