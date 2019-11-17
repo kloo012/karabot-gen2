@@ -50,6 +50,7 @@ input[type='text'] {
 button {
   @apply border-0 rounded-lg cursor-pointer text-base py-2 px-3 mr-3 mt-2;
   color: #662847;
+  background-color: rgba(255, 255, 255, 0.5);
   border-color: #662847;
   transition: 0.2s all linear;
   padding-top: 0.6rem;
@@ -58,7 +59,7 @@ button {
 button:hover {
   color: #4c1a33;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .App__chat-window {
@@ -68,6 +69,13 @@ button:hover {
   padding: theme('spacing.4');
   @apply pb-0;
   width: 100vw;
+}
+
+@media (min-width: 768px) {
+  .App__chat-window {
+    left: calc(50% - 40vw);
+    width: 80vw;
+  }
 }
 
 .MessageWindow {
