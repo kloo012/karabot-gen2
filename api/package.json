@@ -4,7 +4,7 @@
   "description": "api for karabot",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon dev-server.js",
     "test": "test"
   },
   "author": "KLoo <kloo012@gmail.com>",

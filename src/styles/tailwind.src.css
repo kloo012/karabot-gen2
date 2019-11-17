@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+header {
+  @apply border border-solid border-gray-300;
+  font-size: 1.375rem;
+  padding: 1rem;
+}
+
+.gradient-bot {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#77967d+0,bad3dd+100 */
+  background: rgba(119, 150, 125, 0.32); /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    rgba(119, 150, 125, 0.32) 0%,
+    theme('colors.blue.200')
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(119, 150, 125, 0.32) 0%,
+    theme('colors.blue.200')
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(119, 150, 125, 0.32) 0%,
+    theme('colors.blue.200')
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#77967d', endColorstr=theme('colors.blue.200'),GradientType=0 ); /* IE6-9 */
+}
+
+html,
+body {
+  @apply text-base;
+  box-sizing: border-box;
+  font-family: 'Hind', sans-serif;
+}
+
+form {
+  @apply w-full;
+}
+
+input[type='text'] {
+  @apply w-full border border-solid border-gray-300;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+button {
+  @apply border-0 rounded-lg cursor-pointer text-base py-2 px-3 mr-3 mt-2;
+  color: #662847;
+  border-color: #662847;
+  transition: 0.2s all linear;
+  padding-top: 0.6rem;
+}
+
+button:hover {
+  color: #4c1a33;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.App__chat-window {
+  @apply border border-solid border-gray-300 bottom-0 fixed;
+  height: calc(90vh - 67px);
+  left: calc(50% - 50vw);
+  padding: theme('spacing.4');
+  @apply pb-0;
+  width: 100vw;
+}
+
+.MessageWindow {
+  @apply border border-solid border-gray-300 flex-auto overflow-y-scroll pt-0 px-4 pb-4;
+  flex: 1 0 auto;
+  max-height: calc(100% - 0.5rem - 40px - 0.5rem);
+  position: relative;
+}
+
+.MessageWindow__overflow {
+  @apply flex flex-col h-auto;
+}
+
+.MessageWindow__typing::after {
+  content: '';
+  background-image: url('../assets/img/827.gif');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  bottom: 0;
+  position: absolute;
+  height: 25px;
+  width: 50px;
+}
+
+.MessageWindow__typing--false::after {
+  display: none;
+}
+
+.MessageWindow__typing--true::after {
+  display: inline-block;
+}
+
+.MessageInput__input {
+  @apply block text-base p-1 w-full;
+}
+
+.MessageInput {
+  @apply flex flex-col items-center my-4 mx-0;
+  flex: 0 0 40px;
+  height: 40px;
+}
+
+.ChatBubble {
+  @apply my-2 mx-0 p-3 relative rounded-lg;
+}
+
+.ChatBubble::after {
+  content: '';
+  @apply absolute border-solid h-0 w-0;
+  border-color: theme('colors.blue.200') transparent transparent transparent;
+  border-width: 9px 15px 0 0;
+  bottom: -4px;
+}
+
+.ChatBubble--left {
+  @apply gradient-bot self-start rounded-bl-none;
+}
+
+.ChatBubble--left::after {
+  @apply left-0;
+}
+
+.ChatBubble--right {
+  @apply self-end rounded-br-none;
+  background-color: theme('colors.blue.200');
+}
+
+.ChatBubble--right::after {
+  @apply right-0;
+  transform: scaleX(-1);
+}
+
+.ChatBubble--left + .ChatBubble--right,
+.ChatBubble--right + .ChatBubble--left .ChatBubble--left:first-of-type {
+  @apply mt-4;
+}

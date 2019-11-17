@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "start": "run-p start:**",
-    "start:app": "react-scripts start",
+    "start:app": "npm run watch:css & react-scripts start",
     "start:server": "cd api && npm run start",
-    "build": "react-scripts build",
+    "build:style": "tailwind build src/styles/tailwind.src.css -o src/styles/tailwind.css",
+    "build": "npm run build:style && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "now-build": "react-scripts build && mv build dist"
+    "now-build": "npm run build:style && react-scripts build",
+    "watch:css": "postcss src/styles/tailwind.src.css -o src/styles/tailwind.css -w"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,7 +34,6 @@
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-pose": "4.0.8",
-    "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0"
   },
   "devDependencies": {
