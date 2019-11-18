@@ -54,7 +54,7 @@
   "unknown": {
     "response": "Sorry, I'm a new KaraBot and still learning how to use meaningful dialogue. I didn't get that one. Can you repeat what you said in another way?"
   },
-  "future_outlook": {
-    "response": "The future is bright!"
+  "long_pause": {
+    "response": "Are you still there? Remember, you can type 'Menu' at any time for a list of conversation starters..."
   }
 }

@@ -63,26 +63,34 @@ button:hover {
 }
 
 .App__chat-window {
-  @apply border border-solid border-gray-300 bottom-0 fixed;
-  height: calc(90vh - 67px);
+  height: calc(100% - 67px);
   left: calc(50% - 50vw);
-  padding: theme('spacing.4');
-  @apply pb-0;
   width: 100vw;
+  @apply bottom-0 fixed;
 }
 
 @media (min-width: 768px) {
   .App__chat-window {
+    height: calc(90vh - 67px);
     left: calc(50% - 40vw);
+    padding: theme('spacing.4');
     width: 80vw;
+    @apply border border-solid border-gray-300 pb-0;
   }
 }
 
 .MessageWindow {
-  @apply border border-solid border-gray-300 flex-auto overflow-y-scroll pt-0 px-4 pb-4;
+  @apply flex-auto overflow-y-scroll p-4;
   flex: 1 0 auto;
   max-height: calc(100% - 0.5rem - 40px - 0.5rem);
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .MessageWindow {
+    @apply border border-solid border-gray-300;
+    max-height: calc(100% - 0.5rem - 40px - 0.5rem);
+  }
 }
 
 .MessageWindow__overflow {
@@ -108,14 +116,39 @@ button:hover {
   display: inline-block;
 }
 
-.MessageInput__input {
+input[type='text'].MessageInput__input {
   @apply block text-base p-1 w-full;
 }
 
+@media (max-width: 767px) {
+  input[type='text'].MessageInput__input {
+    border-color: theme('colors.white');
+  }
+}
+
+@media (min-width: 768px) {
+  .MessageInput__input {
+    @apply py-3;
+  }
+}
+
 .MessageInput {
-  @apply flex flex-col items-center my-4 mx-0;
+  @apply flex flex-col items-center p-2;
   flex: 0 0 40px;
   height: 40px;
+}
+
+@media (max-width: 767px) {
+  .MessageInput {
+    border-top: 1px solid theme('colors.gray.300');
+  }
+}
+
+@media (min-width: 767px) {
+  .MessageInput {
+    @apply py-4 px-0;
+    height: auto;
+  }
 }
 
 .ChatBubble {

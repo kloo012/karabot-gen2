@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import MessageWindow from './MessageWindow'
 import MessageInput from './MessageInput'
 
+// let pauseTimer
+
 class App extends Component {
   constructor() {
     super()
@@ -10,17 +12,29 @@ class App extends Component {
       messages: [],
       data: null,
       isTyping: false,
+      measureNextPause: false,
     }
   }
 
   componentDidMount() {
-    // Call our fetch function below once the component mounts
     this.getInitMsg()
       .then(res => {
         this.addToConversation(res, true)
+        this.setState({ measureNextPause: true })
       })
-      .catch(err => console.log(err))
+      .catch(e => console.log(e))
   }
+
+  // resetTimer = () => {
+  //   pauseTimer = setTimeout(() => {
+  //     this.getInitMsg()
+  //     .then(res => {
+  //       this.addToConversation(res, true)
+  //       this.setState({ measureNextPause: false })
+  //     })
+  //     .catch(e => console.log(e))
+  //   }, 1000 * 15)
+  // }
 
   getInitMsg = async () => {
     try {
@@ -31,8 +45,12 @@ class App extends Component {
       }
       return body
     } catch (e) {
-      console.log('error - are your servers both running? ' + e)
+      console.log(e)
     }
+  }
+
+  scheduleCall = e => {
+    console.log('schedule')
   }
 
   handleFormSubmit = e => {
@@ -62,8 +80,11 @@ class App extends Component {
       const body = await res.text()
       this.addToConversation(JSON.parse(body), true)
       this.setTyping(false)
-    } catch (err) {
-      console.log(err)
+      // if (this.measureNextPause) {
+      //   this.resetTimer()
+      // }
+    } catch (e) {
+      console.log(e)
     }
   }
 
@@ -92,7 +113,7 @@ class App extends Component {
           <span role="img" aria-label="robot emoji">
             🤖
           </span>{' '}
-          K a r a b o t
+          K a r a b o t{/* <button onClick={this.scheduleCall}>Schedule a call</button> */}
         </header>
         <div className="w-full max-w-md bg-gray-800">
           <div className="App__chat-window">
