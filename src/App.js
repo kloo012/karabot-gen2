@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { setTimer, clearTimer } from './utils/helpers'
 import MessageWindow from './MessageWindow'
 import MessageInput from './MessageInput'
 
-// let pauseTimer
+let chatTimer
 
 class App extends Component {
   constructor() {
@@ -12,7 +13,7 @@ class App extends Component {
       messages: [],
       data: null,
       isTyping: false,
-      measureNextPause: false,
+      measureNextPause: true,
     }
   }
 
@@ -20,22 +21,34 @@ class App extends Component {
     this.getInitMsg()
       .then(res => {
         this.addToConversation(res, true)
-        this.setState({ measureNextPause: true })
       })
       .catch(e => console.log(e))
+    this.initTimer()
   }
 
-  // resetTimer = () => {
-  //   pauseTimer = setTimeout(() => {
-  //     this.getInitMsg()
-  //     .then(res => {
-  //       this.addToConversation(res, true)
-  //       this.setState({ measureNextPause: false })
-  //     })
-  //     .catch(e => console.log(e))
-  //   }, 1000 * 15)
-  // }
+  initTimer = () => {
+    chatTimer = setTimer(() => {
+      this.getCheckInMsg()
+        .then(res => {
+          this.addToConversation(res, true)
+        })
+        .catch(e => console.log(e))
+    }, 15 * 1000)
+  }
 
+  getCheckInMsg = async () => {
+    try {
+      const response = await fetch('/api/getCheckIn')
+      const body = await response.json()
+      if (response.status !== 200) {
+        throw Error(body.message)
+      }
+      this.setState({ measureNextPause: false })
+      return body
+    } catch (e) { console.log(e) }
+  }
+
+  // TODO: dynamic server functions
   getInitMsg = async () => {
     try {
       const response = await fetch('/api/getInit')
@@ -44,9 +57,7 @@ class App extends Component {
         throw Error(body.message)
       }
       return body
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) { console.log(e) }
   }
 
   scheduleCall = e => {
@@ -60,7 +71,7 @@ class App extends Component {
     this.sendResponse(msg)
   }
 
-  setTyping = val => {
+  setTypingGif = val => {
     this.setState({ isTyping: val })
   }
 
@@ -68,7 +79,7 @@ class App extends Component {
     this.addToConversation({
       response: msg,
     })
-    this.setTyping(true)
+    this.setTypingGif(true)
     const res = await fetch('/api/postMsg', {
       method: 'POST',
       headers: {
@@ -79,16 +90,15 @@ class App extends Component {
     try {
       const body = await res.text()
       this.addToConversation(JSON.parse(body), true)
-      this.setTyping(false)
-      // if (this.measureNextPause) {
-      //   this.resetTimer()
-      // }
-    } catch (e) {
-      console.log(e)
-    }
+      this.setTypingGif(false)
+    } catch (e) { console.log(e) }
   }
 
   handleMessageInput = e => {
+    clearTimer(chatTimer)
+    if (this.state.measureNextPause) {
+      this.initTimer()
+    }
     this.setState({ currentMsg: e.target.value })
   }
 
@@ -104,6 +114,10 @@ class App extends Component {
       currentMsg: '',
       messages: newMessages,
     })
+    clearTimer(chatTimer)
+    if (this.state.measureNextPause) {
+      this.initTimer()
+    }
   }
 
   render() {

@@ -57,6 +57,14 @@ app.get('/api/getInit', (req, res) => {
   }
 })
 
+app.get('/api/getCheckIn', (req, res) => {
+  if (res) {
+    res.send(resDialogue.long_pause)
+  } else {
+    console.log('server error')
+  }
+})
+
 app.post('/api/postMsg', (req, res) => {
   console.log(`Posted to server: ${req.body.post}`)
   client
